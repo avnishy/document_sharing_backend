@@ -12,8 +12,8 @@ const addReview = async (req, res) => {
     const id = req.params.id
 
     let data = {
-        product_id: id,
-        rating: req.body.rating,
+        document_id: id,
+        name: req.body.name,
         description: req.body.description
     }
 

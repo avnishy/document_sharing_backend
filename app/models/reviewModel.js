@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
 
     const Review = sequelize.define("review", {
-        Name: {
+        name: {
             type: DataTypes.STRING
         },
         description: {

@@ -8,17 +8,19 @@ const db = require("./app/models");
 
 const app = express();
 
-
 var corsOptions = {
   origin: "http://localhost:3000"
 };
 app.use(cors(corsOptions));
+
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
+
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
 db.sequelize.sync();
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Doc Sharing Platform." });
@@ -30,8 +32,8 @@ require('./app/routes/user.routes')(app);
 
 
 //For Document Upload routers
-const router = require('./app/routes/documentRouter.js')
-app.use('/api/document', router)
+const router = require('./app/routes/documentRouter.js');
+app.use('/api/document', router);
 
 
 //static Images Folder

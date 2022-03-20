@@ -12,6 +12,7 @@ router.get('/published', documentController.getPublishedDocument)
 
 // Review Url and Controller
 router.get('/allReviews', reviewController.getAllReviews)
+
 router.post('/addReview/:id', reviewController.addReview)
 
 // get document Reviews

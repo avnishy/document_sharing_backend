@@ -1,3 +1,14 @@
+{/*
+We Have 8 Modules in this file such tha
+1.  Create Document 
+2.
+3.
+4.
+5.
+6.
+7.
+8.  Upload Image using Multer & we Define the Name of File, Folder Where Our File stored, max size of file, file type we Acccept 
+*/}
 const db = require('../models')
 // image Upload
 const multer = require('multer')
@@ -94,15 +105,16 @@ const storage = multer.diskStorage({
         cb(null, 'documents')
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname))
+        cb(null, Date.now() + path.extname(file.originalname)) //To create a unique filename for every file
     }
 })
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: '1000000' },
+    limits: { fileSize: '5000000' },    //max Size of file is 5mb 
     fileFilter: (req, file, cb) => {
-        const fileTypes = /jpeg|jpg|png|gif|pdf|doc|docs|csv|exl|xls/
+        //API Accepts Formats for Images, gif, pdf, word file, publisher file, presentaion, excel sheets
+        const fileTypes = /jpeg|jpg|png|gif|pdf|doc|docx|csv|xls|xlsx|pub|pptx|ppt/ 
         const mimeType = fileTypes.test(file.mimetype)  
         const extname = fileTypes.test(path.extname(file.originalname))
 
@@ -111,7 +123,7 @@ const upload = multer({
         }
         cb('Give proper files formate to upload')
     }
-}).single('document')
+}).single('document') // For Multiple docs upload we Use <.array('document',5)> for 5 images at a time
 
 module.exports = {
     addDocument,

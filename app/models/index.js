@@ -29,11 +29,9 @@ sequelize.authenticate()
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-//Document 
+
 db.document = require('./documentModel.js')(sequelize, DataTypes)
 db.reviews = require('./reviewModel.js')(sequelize, DataTypes)
-
-//Users
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 //optional For Debugging
