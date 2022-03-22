@@ -13,6 +13,7 @@ const db = require('../models')
 // image Upload
 const multer = require('multer')
 const path = require('path')
+const baseUrl = "http://localhost:8080/files/";
 
 // create main Model
 const Document = db.document
@@ -26,7 +27,8 @@ const addDocument = async (req, res) => {
         document: req.file.path,
         title: req.body.title,
         description: req.body.description,
-        published: req.body.published ? req.body.published : false
+        published: req.body.published ? req.body.published : false,
+        linkurl: baseUrl + req.file.originalname
     }
 
     const document = await Document.create(info)
@@ -105,7 +107,7 @@ const storage = multer.diskStorage({
         cb(null, 'documents')
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)) //To create a unique filename for every file
+        cb(null, file.originalname) //To create a unique filename for every file
     }
 })
 

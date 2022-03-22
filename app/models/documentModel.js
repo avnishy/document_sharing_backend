@@ -13,8 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         published: {
             type: DataTypes.BOOLEAN
+        },
+        linkurl: {
+            type: DataTypes.TEXT
         }
-    
     })
     return Document
 }

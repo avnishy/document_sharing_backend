@@ -32,9 +32,9 @@ db.sequelize = sequelize;
 
 db.document = require('./documentModel.js')(sequelize, DataTypes)
 db.reviews = require('./reviewModel.js')(sequelize, DataTypes)
-db.user = require("../models/user.model.js")(sequelize, Sequelize);
-db.role = require("../models/role.model.js")(sequelize, Sequelize);
-//optional For Debugging
+db.user = require("./user.model.js")(sequelize, Sequelize);
+db.role = require("./role.model.js")(sequelize, Sequelize);
+//optional For Debuggin
 db.sequelize.sync({ force: false })
 .then(() => {
     console.log('yes re-sync done!')
@@ -47,7 +47,7 @@ db.role.belongsToMany(db.user, {
   otherKey: "userId"
 });
 db.user.belongsToMany(db.role, {
-  through: "user_roles",
+  through: "user_role",
   foreignKey: "userId",
   otherKey: "roleId"
 });
