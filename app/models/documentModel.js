@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 
-    const Document = sequelize.define("document", {
+    const Document = sequelize.define("documents", {
         document: {
             type: DataTypes.STRING
         },
