@@ -18,23 +18,26 @@ const baseUrl = "http://localhost:8080/files/";
 // create main Model
 const Document = db.document
 const Review = db.reviews
+const User = db.user;
+
 
 // main work
 // 1. create document
 const addDocument = async (req, res) => {
-
+    
+    let id = req.params.id
     let info = {
         document: req.file.path,
         title: req.body.title,
         description: req.body.description,
         published: req.body.published ? req.body.published : false,
-        linkurl: baseUrl + req.file.originalname
+        linkurl: baseUrl + req.file.originalname,
+        userID: id
     }
 
     const document = await Document.create(info)
     res.status(200).send(document)
     console.log(document)
-
 }
 
 
@@ -111,6 +114,22 @@ const storage = multer.diskStorage({
     }
 })
 
+
+// 9. get Document By UserID
+const getUserDocument = async (req, res) => {
+    let id = req.params.id
+    let document = await Document.findAll({ where: { userID: id } })
+    res.status(200).send(document)
+}
+
+// Get Doc user Name By User ID
+const getUsernameById = async (req, res) => {
+        let  userid = req.body.id;
+        let user = await User.findOne({ where: { id: userid } })
+        res.status(200).send(user.username);
+}
+
+
 const upload = multer({
     storage: storage,
     limits: { fileSize: '5000000' },    //max Size of file is 5mb 
@@ -119,7 +138,6 @@ const upload = multer({
         const fileTypes = /jpeg|jpg|png|gif|pdf|doc|docx|csv|xls|xlsx|pub|pptx|ppt/ 
         const mimeType = fileTypes.test(file.mimetype)  
         const extname = fileTypes.test(path.extname(file.originalname))
-
         if(mimeType && extname) {
             return cb(null, true)
         }
@@ -131,9 +149,11 @@ module.exports = {
     addDocument,
     getAllDocuments,
     getOneDocument,
+    getUserDocument,
     updateDocument,
     deleteDocument,
     getPublishedDocument,
     getDocumentReviews,
-    upload
+    upload,
+    getUsernameById
 }

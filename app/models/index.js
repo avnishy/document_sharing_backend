@@ -46,13 +46,25 @@ db.role.belongsToMany(db.user, {
   foreignKey: "roleId",
   otherKey: "userId"
 });
+
 db.user.belongsToMany(db.role, {
   through: "user_roles",
   foreignKey: "userId",
   otherKey: "roleId"
 });
 
-//1 to many relationship in Documnet and Comment/Review
+//One to many relationship in User and Document
+db.user.hasMany(db.document, {
+  foreignKey: 'userID',
+  as: 'document'
+})
+
+db.document.belongsTo(db.user, {
+  foreignKey: 'userID',
+  as: 'users'
+})
+
+//1 to many relationship in Document and Comment/Review
 db.document.hasMany(db.reviews, {
   foreignKey: 'document_id',
   as: 'review'

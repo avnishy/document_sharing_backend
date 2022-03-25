@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         linkurl: {
             type: DataTypes.TEXT
+        },
+        userID:{
+            type:DataTypes.INTEGER
         }
     })
     return Document

@@ -12,19 +12,19 @@ exports.signup = (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
   })
-    .then(user => {
+    .then((user) => {
       if (req.body.roles) {
         Role.findAll({
           where: {
             name: {
-              [Op.or]: req.body.roles
-            }
-          }
-        }).then(roles => {
+              [Op.or]: req.body.roles,
+            },
+          },
+        }).then((roles) => {
           user.setRoles(roles).then(() => {
-            res.send({ message: "User was registered successfully!"});
+            res.send({ message: "User was registered successfully!" });
           });
         });
       } else {
@@ -34,38 +34,31 @@ exports.signup = (req, res) => {
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({ message: err.message });
     });
 };
 
-
-
-
 exports.signin = (req, res) => {
   User.findOne({
     where: {
-      username: req.body.username
-    }
-  }).then(user => {
+      username: req.body.username,
+    },
+  }).then((user) => {
       if (!user) {
         return res.status(404).send({ message: "Username Not Found." });
       }
-
-      
-     if (!(req.body.password=== user.password)) {
+      if (!(req.body.password === user.password)) {
         return res.status(401).send({
           accessToken: null,
-          message: "Invalid Password!"
+          message: "Invalid Password!",
         });
       }
-
       var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400 // 24 hours
+        expiresIn: 86400, // 24 hours
       });
-
       var authorities = [];
-      user.getRoles().then(roles => {
+      user.getRoles().then((roles) => {
         for (let i = 0; i < roles.length; i++) {
           authorities.push("ROLE_" + roles[i].name.toUpperCase());
         }
@@ -74,10 +67,11 @@ exports.signin = (req, res) => {
           username: user.username,
           email: user.email,
           roles: authorities,
-          accessToken: token
+          accessToken: token,
         });
       });
-    }).catch(err => {
+    })
+    .catch((err) => {
       res.status(500).send({ message: err.message });
     });
 };

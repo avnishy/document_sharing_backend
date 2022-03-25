@@ -6,7 +6,8 @@ const reviewController = require('../controllers/reviewController')
 const router = require('express').Router()
 
 // use routers
-router.post('/adddocument', documentController.upload , documentController.addDocument)
+router.post('/adddocument/:id', documentController.upload , documentController.addDocument)
+router.get('/getuserdoc/:id', documentController.getUserDocument)
 router.get('/alldocuments', documentController.getAllDocuments)
 router.get('/published', documentController.getPublishedDocument)
 
@@ -14,6 +15,8 @@ router.get('/published', documentController.getPublishedDocument)
 router.get('/allReviews', reviewController.getAllReviews)
 
 router.post('/addReview/:id', reviewController.addReview)
+
+router.post('/getusernamebyid', documentController.getUsernameById)
 
 // get document Reviews
 router.get('/getdocumentReviews/:id', documentController.getDocumentReviews)
