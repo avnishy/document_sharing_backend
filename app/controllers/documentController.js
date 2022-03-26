@@ -13,12 +13,12 @@ const db = require('../models')
 // image Upload
 const multer = require('multer')
 const path = require('path')
-const baseUrl = "http://localhost:8080/files/";
+const baseUrl = "http://localhost:8080/files/"
 
 // create main Model
 const Document = db.document
 const Review = db.reviews
-const User = db.user;
+const User = db.user
 
 
 // main work

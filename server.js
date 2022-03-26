@@ -9,7 +9,7 @@ const db = require("./app/models");
 const app = express();
 
 var corsOptions = {
-// origin: "http://localhost:3000"
+origin: "http://localhost:3000"
 };
 app.use(cors(corsOptions));
 
@@ -22,25 +22,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 db.sequelize.sync();
 // db.sequelize.sync({force: false}).then(() => {
 //     console.log('Drop and Resync Db');
-//     //initial();
+//     initial();
 //   });
   
-  // function initial() {
-  //   Role.create({
-  //     id: 1,
-  //     name: "user"
-  //   });
+//   function initial() {
+//     Role.create({
+//       id: 1,
+//       name: "user"
+//     });
    
-  //   Role.create({
-  //     id: 2,
-  //     name: "reviewer"
-  //   });
+//     Role.create({
+//       id: 2,
+//       name: "reviewer"
+//     });
    
-  //   Role.create({
-  //     id: 3,
-  //     name: "admin"
-  //   });
-  // }
+//     Role.create({
+//       id: 3,
+//       name: "admin"
+//     });
+//   }
 
 // simple route
 app.get("/", (req, res) => {
