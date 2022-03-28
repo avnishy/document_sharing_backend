@@ -21,6 +21,8 @@ router.get('/getusernamebyid/:id', documentController.getUsernameById)
 // get document Reviews
 router.get('/getdocumentReviews/:id', documentController.getDocumentReviews)
 
+//get user list
+router.get('/getuserlist', documentController.getUserList)
 
 // documents router
 router.get('/:id', documentController.getOneDocument)

@@ -9,19 +9,14 @@ module.exports = function(app) {
     next();
   });
   app.get("/api/test/all", controller.allAccess);
-  app.get(
-    "/api/test/user",
+  app.get("/api/test/user",
     [authJwt.verifyToken],
-    controller.userBoard
-  );
-  app.get(
-    "/api/test/rev",
+    controller.userBoard);
+  app.get("/api/test/rev",
     [authJwt.verifyToken, authJwt.isReviewer],
-    controller.reviewerBoard
-  );
-  app.get(
-    "/api/test/admin",
+    controller.reviewerBoard);
+  app.get("/api/test/admin",
     [authJwt.verifyToken, authJwt.isAdmin],
-    controller.adminBoard
-  );
+    controller.adminBoard);
+    
 };

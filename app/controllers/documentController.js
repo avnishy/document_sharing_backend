@@ -131,6 +131,11 @@ const getUsernameById = async (req, res) => {
         res.status(200).send(user.username);
 }
 
+//11 Get Userb List
+const getUserList = async (req, res) => {
+    let users = await User.findAll({})
+    res.status(200).send(users);
+}
 
 const upload = multer({
     storage: storage,
@@ -157,5 +162,6 @@ module.exports = {
     getPublishedDocument,
     getDocumentReviews,
     upload,
-    getUsernameById
+    getUsernameById,
+    getUserList
 }
