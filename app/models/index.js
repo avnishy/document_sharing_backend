@@ -34,11 +34,11 @@ db.document = require('./documentModel.js')(sequelize, DataTypes)
 db.reviews = require('./reviewModel.js')(sequelize, DataTypes)
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.role = require("./role.model.js")(sequelize, Sequelize);
-//optional For Debuggin
-db.sequelize.sync({ force: false })
-.then(() => {
-    console.log('yes re-sync done!')
-})
+//This is For Recreate Tables
+// db.sequelize.sync({ force: true })
+// .then(() => {
+//     console.log('yes re-sync done!')
+// })
 
 //Relations Between Users
 db.role.belongsToMany(db.user, {

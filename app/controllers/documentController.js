@@ -26,13 +26,15 @@ const User = db.user
 const addDocument = async (req, res) => {
     
     let id = req.params.id
+    let user = await User.findOne({ where: { id: id } })
     let info = {
         document: req.file.path,
         title: req.body.title,
         description: req.body.description,
         published: req.body.published ? req.body.published : false,
         linkurl: baseUrl + req.file.originalname,
-        userID: id
+        userID: id,
+        userName: user.username
     }
 
     const document = await Document.create(info)
@@ -124,7 +126,7 @@ const getUserDocument = async (req, res) => {
 
 // Get Doc user Name By User ID
 const getUsernameById = async (req, res) => {
-        let  userid = req.body.id;
+        let  userid = req.params.id;
         let user = await User.findOne({ where: { id: userid } })
         res.status(200).send(user.username);
 }

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 
-    const Document = sequelize.define("documents", {
+    const Document = sequelize.define("document", {
         document: {
             type: DataTypes.STRING
         },
@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         userID:{
             type:DataTypes.INTEGER
+        },
+        userName:{
+            type:DataTypes.TEXT
         }
     })
     return Document

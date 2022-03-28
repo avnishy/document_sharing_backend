@@ -16,7 +16,7 @@ router.get('/allReviews', reviewController.getAllReviews)
 
 router.post('/addReview/:id', reviewController.addReview)
 
-router.post('/getusernamebyid', documentController.getUsernameById)
+router.get('/getusernamebyid/:id', documentController.getUsernameById)
 
 // get document Reviews
 router.get('/getdocumentReviews/:id', documentController.getDocumentReviews)
