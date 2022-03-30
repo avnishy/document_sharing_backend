@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 db.sequelize.sync();
-// db.sequelize.sync({force: false}).then(() => {
+// db.sequelize.sync({force: true}).then(() => {
 //     console.log('Drop and Resync Db');
 //     initial();
 //   });
@@ -44,13 +44,18 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Doc Sharing Platform." });
+  res.json({message: "Welcome to Doc Sharing Platform."});
 });
 
 //For Users Login Signup etc...
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/download.routes')(app);
+
+
+
+require('./app/routes/getuser.routes.js')(app);
+require('./app/routes/updateuser.routes.js')(app);
 
 //For Document Upload routers
 const router = require('./app/routes/documentRouter.js');
@@ -59,8 +64,6 @@ app.use('/api/document', router);
 
 //static Images Folder
 app.use('/document', express.static('./document'))
-
-
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
