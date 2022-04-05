@@ -60,6 +60,9 @@ exports.signin = (req, res) => {
       var authorities = [];
       user.getRoles().then((roles) => {
         for (let i = 0; i < roles.length; i++) {
+          // if(roles[i].name=="user"){authorities.push("Reviewer");}
+          // else if(roles[i].name=="admin"){authorities.push("Admin");}
+          // else if(roles[i].name=="reviewer"){authorities.push("User");}
           authorities.push("ROLE_" + roles[i].name.toUpperCase());
         }
         res.status(200).send({
